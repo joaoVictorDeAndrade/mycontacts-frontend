@@ -1,8 +1,8 @@
-import js from '@eslint/js'
-import globals from 'globals'
-import react from 'eslint-plugin-react'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
+import js from '@eslint/js';
+import globals from 'globals';
+import react from 'eslint-plugin-react';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
 
 export default [
   { ignores: ['dist'] },
@@ -33,10 +33,10 @@ export default [
         'warn',
         { allowConstantExport: true },
       ],
-      // Define aspas simples como padrão
       quotes: ['error', 'single'],
-      // Remove espaços em branco desnecessários
       'no-trailing-spaces': ['error'],
+      semi: ['error', 'always'],
+      indent: ['error', 2]
     },
   },
-]
+];

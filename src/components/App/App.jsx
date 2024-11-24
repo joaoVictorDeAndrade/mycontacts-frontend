@@ -1,4 +1,5 @@
 import { ThemeProvider } from 'styled-components';
+import { BrowserRouter } from 'react-router-dom';
 
 import GlobalStyles from '../../assets/styles/global.js';
 import defaultTheme from '../../assets/styles/themes/default.js';
@@ -6,18 +7,20 @@ import defaultTheme from '../../assets/styles/themes/default.js';
 import { Container } from './styles.js';
 
 import Header from '../Header/Header.jsx';
-import ContactsList from '../ContactsList/ContactsList.jsx';
+import Routes from '../../Routes.jsx';
 
 function App() {
   return (
-    <ThemeProvider theme={defaultTheme} >
-      <GlobalStyles />
+    <BrowserRouter>
+      <ThemeProvider theme={defaultTheme} >
+        <GlobalStyles />
 
-      <Container>
-        <Header />
-        <ContactsList />
-      </Container>
-    </ThemeProvider>
+        <Container>
+          <Header />
+          <Routes />
+        </Container>
+      </ThemeProvider>
+    </BrowserRouter>
   );
 }
 

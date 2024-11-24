@@ -8,6 +8,7 @@ export const Header = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 32px;
 
   strong {
     font-size: 24px;
@@ -99,6 +100,24 @@ export const Card = styled.div`
     button {
       background: transparent;
       border: none;
+    }
+  }
+`;
+
+export const InputSearchContainer = styled.div`
+  width: 100%;
+
+  input {
+    width: 100%;
+    background: #FFF;
+    border: none;
+    border-radius: 25px;
+    height: 50px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    padding: 0 16px;
+
+    &::placeholder {
+      color: #BCBCBC;
     }
   }
 `;

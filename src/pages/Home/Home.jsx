@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Container, Header, ListContainer, Card, InputSearchContainer } from './styles.js';
 
 import arrow from '../../assets/images/icons/arrow.svg';
@@ -14,7 +15,7 @@ export default function Home() {
       <Header>
         <strong>3 contatos</strong>
 
-        <a href="/">Novo contato</a>
+        <Link to="/new">Novo contato</Link>
       </Header>
 
       <ListContainer>
@@ -37,51 +38,9 @@ export default function Home() {
           </div>
 
           <div className="actions">
-            <a href="/">
+            <Link to="/edit/123">
               <img src={edit} alt="Editar contato" />
-            </a>
-            <button type="button">
-              <img src={trash} alt="Remover contato" />
-            </button>
-          </div>
-        </Card>
-
-        <Card>
-          <div className="info">
-            <div className="contact-name">
-              <strong>João da Silva</strong>
-              <small>Instagram</small>
-            </div>
-
-            <span>joao@gmail.com</span>
-            <span>(16) 99999-4343</span>
-          </div>
-
-          <div className="actions">
-            <a href="/">
-              <img src={edit} alt="Editar contato" />
-            </a>
-            <button type="button">
-              <img src={trash} alt="Remover contato" />
-            </button>
-          </div>
-        </Card>
-
-        <Card>
-          <div className="info">
-            <div className="contact-name">
-              <strong>João da Silva</strong>
-              <small>Instagram</small>
-            </div>
-
-            <span>joao@gmail.com</span>
-            <span>(16) 99999-4343</span>
-          </div>
-
-          <div className="actions">
-            <a href="/public">
-              <img src={edit} alt="Editar contato" />
-            </a>
+            </Link>
             <button type="button">
               <img src={trash} alt="Remover contato" />
             </button>

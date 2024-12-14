@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+import { useErrors } from '../../hooks/useErrors.js';
 
 import { isEmailValid } from '../../utils/isEmailValid.js';
 
@@ -15,23 +16,19 @@ export default function ContactForm({ buttonLabel }) {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [category, setCategory] = useState('');
-  const [errors, setErrors] = useState([]);
+
+  const { setError, removeError, getErrorMessageByFieldName } = useErrors();
 
   function handleNameChange(event) {
     setName(event.target.value);
 
-    if (event.target.value.length < 3) {
-      setErrors((prevState) => [
-        ...prevState,
-        { field: 'name', message: 'O nome é obrigatório' },
-      ]);
+    if (!event.target.value.length) {
+      setError({ field: 'name', message: 'Nome é obrigatório' });
 
       return;
     }
 
-    setErrors((prevState) =>
-      prevState.filter((error) => error.field !== 'name')
-    );
+    removeError('name');
   }
 
   function handleEmailChange(event) {
@@ -40,23 +37,12 @@ export default function ContactForm({ buttonLabel }) {
     setEmail(input);
 
     if (input && !isEmailValid(input)) {
-      const errorAlreadyExists = errors.some(
-        (error) => error.field === 'email'
-      );
-
-      if (errorAlreadyExists) return;
-
-      setErrors((prevState) => [
-        ...prevState,
-        { field: 'email', message: 'E-mail inválido' },
-      ]);
+      setError({ field: 'email', message: 'E-mail inválido' });
 
       return;
     }
 
-    setErrors((prevState) =>
-      prevState.filter((error) => error.field !== 'email')
-    );
+    removeError('email');
   }
 
   function handleSubmit(event) {
@@ -70,12 +56,8 @@ export default function ContactForm({ buttonLabel }) {
     });
   }
 
-  function getErrorMessageByFieldName(fieldName) {
-    return errors.find((error) => error.field === fieldName)?.message;
-  }
-
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} noValidate>
       <FormGroup error={getErrorMessageByFieldName('name')}>
         <Input
           placeholder="Nome"

@@ -36,7 +36,8 @@ export default [
       quotes: ['error', 'single'],
       'no-trailing-spaces': ['error'],
       semi: ['error', 'always'],
-      indent: ['error', 2]
+      indent: ['error', 2],
+      'max-len': ['error', { code: 80 }],
     },
   },
 ];

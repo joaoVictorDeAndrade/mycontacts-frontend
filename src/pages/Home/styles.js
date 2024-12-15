@@ -12,48 +12,50 @@ export const Header = styled.header`
 
   strong {
     font-size: 24px;
-    color: ${({theme}) => theme.colors.gray[900]};
+    color: ${({ theme }) => theme.colors.gray[900]};
   }
 
   a {
-    color: ${({theme}) => theme.colors.primary.main};
+    color: ${({ theme }) => theme.colors.primary.main};
     text-decoration: none;
     font-weight: bold;
-    border: 2px solid ${({theme}) => theme.colors.primary.main};
+    border: 2px solid ${({ theme }) => theme.colors.primary.main};
     padding: 8px 16px;
     border-radius: 4px;
     transition: all 0.2s ease-in;
 
     &:hover {
-      background: ${({theme}) => theme.colors.primary.main};
+      background: ${({ theme }) => theme.colors.primary.main};
       color: #fff;
     }
   }
 `;
 
-export const ListContainer = styled.div`
+export const ListHeader = styled.header`
   margin-top: 24px;
+  margin-bottom: 8px;
 
-  header {
-    margin-bottom: 8px;
+  button {
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
 
-    button {
-      background: transparent;
-      border: none;
-      display: flex;
-      align-items: center;
+    img {
+      rotate: ${({ orderBy }) => (orderBy === 'asc' ? '0deg' : '180deg')};
+      transition: rotate 0.2s ease-in;
+    }
 
-      span {
-        margin-right: 8px;
-        font-weight: bold;
-        color: ${({theme}) => theme.colors.primary.main};
-      }
+    span {
+      margin-right: 8px;
+      font-weight: bold;
+      color: ${({ theme }) => theme.colors.primary.main};
     }
   }
 `;
 
 export const Card = styled.div`
-  background: ${({theme}) => theme.colors.white};
+  background: ${({ theme }) => theme.colors.white};
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
   padding: 16px;
   border-radius: 4px;
@@ -72,8 +74,8 @@ export const Card = styled.div`
       gap: 8px;
 
       small {
-        background: ${({theme}) => theme.colors.primary.lighter};
-        color: ${({theme}) => theme.colors.primary.main};
+        background: ${({ theme }) => theme.colors.primary.lighter};
+        color: ${({ theme }) => theme.colors.primary.main};
         font-weight: bold;
         text-transform: uppercase;
         padding: 4px 8px;
@@ -84,7 +86,7 @@ export const Card = styled.div`
     span {
       display: block;
       font-size: 14px;
-      color: ${({theme}) => theme.colors.gray[200]};
+      color: ${({ theme }) => theme.colors.gray[200]};
     }
   }
 
@@ -109,7 +111,7 @@ export const InputSearchContainer = styled.div`
 
   input {
     width: 100%;
-    background: #FFF;
+    background: #fff;
     border: none;
     border-radius: 25px;
     height: 50px;
@@ -117,7 +119,7 @@ export const InputSearchContainer = styled.div`
     padding: 0 16px;
 
     &::placeholder {
-      color: #BCBCBC;
+      color: #bcbcbc;
     }
   }
 `;

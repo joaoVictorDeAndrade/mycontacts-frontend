@@ -31,7 +31,9 @@ export const Header = styled.header`
   }
 `;
 
-export const ListHeader = styled.header`
+export const ListHeader = styled.header.withConfig({
+  shouldForwardProp: (prop) => prop !== 'orderBy',
+})`
   margin-top: 24px;
   margin-bottom: 8px;
 

@@ -1,7 +1,11 @@
 import { useEffect, useMemo, useState } from 'react';
 import { formatPhone } from '../../utils/formatPhone.js';
 import { fullNormalize } from '../../utils/fullNormalize.js';
+
 import { Link } from 'react-router-dom';
+
+import Loader from '../../components/Loader/Loader.jsx';
+
 import {
   Container,
   Header,
@@ -13,11 +17,13 @@ import {
 import arrow from '../../assets/images/icons/arrow.svg';
 import edit from '../../assets/images/icons/edit.svg';
 import trash from '../../assets/images/icons/trash.svg';
+import ContactsService from '../../services/ContactsService.js';
 
 export default function Home() {
   const [contacts, setContacts] = useState([]);
   const [orderBy, setOrderBy] = useState('asc');
   const [searchTerm, setSearchTerm] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
   const filteredContacts = useMemo(() => {
     return contacts.filter((contact) => {
@@ -30,12 +36,17 @@ export default function Home() {
 
   useEffect(() => {
     async function fetchContacts() {
-      const response = await fetch(
-        `http://localhost:3001/contacts?orderBy=${orderBy}`
-      );
-      const json = await response.json();
+      try {
+        setIsLoading(true);
 
-      setContacts(json);
+        const contactsList = await ContactsService.fetchContacts(orderBy);
+
+        setContacts(contactsList);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+      }
     }
 
     fetchContacts();
@@ -48,6 +59,8 @@ export default function Home() {
   function handleChangeSearchTerm(event) {
     setSearchTerm(event.target.value);
   }
+
+  if (isLoading) return <Loader />;
 
   return (
     <Container>

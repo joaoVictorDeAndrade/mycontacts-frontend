@@ -4,11 +4,16 @@ export const Container = styled.div`
   margin-top: 32px;
 `;
 
-export const Header = styled.header`
+export const Header = styled.header.withConfig({
+  shouldForwardProp: (prop) => prop !== 'hasError',
+})`
   display: flex;
-  justify-content: space-between;
+  justify-content: ${({ hasError }) =>
+    hasError ? 'flex-end' : 'space-between'};
   align-items: center;
   margin-top: 32px;
+  border-bottom: 2px solid ${({ theme }) => theme.colors.gray[100]};
+  padding-bottom: 16px;
 
   strong {
     font-size: 24px;
@@ -123,5 +128,20 @@ export const InputSearchContainer = styled.div`
     &::placeholder {
       color: #bcbcbc;
     }
+  }
+`;
+
+export const ErrorContainer = styled.div`
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+
+  strong {
+    font-size: 22px;
+    color: ${({ theme }) => theme.colors.danger.main};
+    display: block;
+    margin-bottom: 8px;
   }
 `;

@@ -14,12 +14,16 @@ import {
   Card,
   InputSearchContainer,
   ErrorContainer,
+  EmptyListContainer,
+  SearchNotFoundContainer,
 } from './styles.js';
 
 import arrow from '../../assets/images/icons/arrow.svg';
 import edit from '../../assets/images/icons/edit.svg';
 import trash from '../../assets/images/icons/trash.svg';
 import sad from '../../assets/images/sad.svg';
+import emptyBox from '../../assets/images/empty-box.svg';
+import magnifierQuestion from '../../assets/images/magnifier-question.svg';
 
 import ContactsService from '../../services/ContactsService.js';
 
@@ -39,12 +43,17 @@ export default function Home() {
     });
   }, [contacts, searchTerm]);
 
+  const justifyContent = useMemo(() => {
+    if (hasError) return 'flex-end';
+
+    return contacts.length > 0 ? 'space-between' : 'center';
+  }, [hasError, contacts.length]);
+
   const fetchContacts = useCallback(async () => {
     try {
       setIsLoading(true);
 
       const contactsList = await ContactsService.fetchContacts(orderBy);
-
       setHasError(false);
       setContacts(contactsList);
     } catch (error) {
@@ -74,17 +83,19 @@ export default function Home() {
 
   return (
     <Container>
-      <InputSearchContainer>
-        <input
-          type="text"
-          placeholder="Pesquise pelo nome"
-          value={searchTerm}
-          onChange={handleChangeSearchTerm}
-        />
-      </InputSearchContainer>
+      {contacts.length > 0 && (
+        <InputSearchContainer>
+          <input
+            type="text"
+            placeholder="Pesquise pelo nome"
+            value={searchTerm}
+            onChange={handleChangeSearchTerm}
+          />
+        </InputSearchContainer>
+      )}
 
-      <Header hasError={hasError}>
-        {!hasError && (
+      <Header justifyContent={justifyContent}>
+        {!hasError && contacts.length > 0 && (
           <strong>
             {contacts.length}
             {contacts.length === 1 ? ' contato' : ' contatos'}
@@ -108,6 +119,29 @@ export default function Home() {
 
       {!hasError && (
         <>
+          {contacts.length < 1 && !isLoading && (
+            <EmptyListContainer>
+              <img src={emptyBox} alt="" />
+
+              <p>
+                Você ainda não tem nenhum contato cadastrado! Clique no botão
+                <strong> ”Novo contato”</strong> à cima para cadastrar o seu
+                primeiro!
+              </p>
+            </EmptyListContainer>
+          )}
+
+          {contacts.length > 0 && filteredContacts.length === 0 && (
+            <SearchNotFoundContainer>
+              <img src={magnifierQuestion} alt="" />
+
+              <p>
+                Nenhum resultado foi encontrado para ”
+                <strong>{searchTerm}</strong>”.
+              </p>
+            </SearchNotFoundContainer>
+          )}
+
           {filteredContacts.length > 0 && (
             <ListHeader orderBy={orderBy}>
               <button type="button" onClick={handleToggleOrderBy}>

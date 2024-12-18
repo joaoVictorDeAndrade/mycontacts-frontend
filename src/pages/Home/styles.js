@@ -5,11 +5,10 @@ export const Container = styled.div`
 `;
 
 export const Header = styled.header.withConfig({
-  shouldForwardProp: (prop) => prop !== 'hasError',
+  shouldForwardProp: (prop) => prop !== 'justifyContent',
 })`
   display: flex;
-  justify-content: ${({ hasError }) =>
-    hasError ? 'flex-end' : 'space-between'};
+  justify-content: ${({ justifyContent }) => justifyContent};
   align-items: center;
   margin-top: 32px;
   border-bottom: 2px solid ${({ theme }) => theme.colors.gray[100]};
@@ -143,5 +142,36 @@ export const ErrorContainer = styled.div`
     color: ${({ theme }) => theme.colors.danger.main};
     display: block;
     margin-bottom: 8px;
+  }
+`;
+
+export const EmptyListContainer = styled.div`
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+
+  p {
+    color: ${({ theme }) => theme.colors.gray[200]};
+    text-align: center;
+
+    strong {
+      color: ${({ theme }) => theme.colors.primary.main};
+    }
+  }
+`;
+
+export const SearchNotFoundContainer = styled.div`
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 24px;
+
+  p {
+    color: ${({ theme }) => theme.colors.gray[200]};
+    text-align: center;
+    word-break: break-all;
   }
 `;

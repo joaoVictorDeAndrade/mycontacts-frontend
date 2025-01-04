@@ -25,15 +25,17 @@ export default styled.button`
     cursor: not-allowed;
   }
 
-  ${({ danger }) => danger && css`
-    background: ${({ theme }) => theme.colors.danger.main};
+  ${({ danger }) =>
+    danger &&
+    css`
+      background: ${({ theme }) => theme.colors.danger.main};
 
-    &:hover {
-      background: ${({ theme }) => theme.colors.danger.light};
-    }
+      &:hover {
+        background: ${({ theme }) => theme.colors.danger.light};
+      }
 
-    &:active {
-      background: ${({ theme }) => theme.colors.danger.dark};
-    }
-  `};
+      &:active {
+        background: ${({ theme }) => theme.colors.danger.dark};
+      }
+    `};
 `;

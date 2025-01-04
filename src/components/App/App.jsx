@@ -12,7 +12,7 @@ import Routes from '../../Routes.jsx';
 function App() {
   return (
     <BrowserRouter>
-      <ThemeProvider theme={defaultTheme} >
+      <ThemeProvider theme={defaultTheme}>
         <GlobalStyles />
 
         <Container>

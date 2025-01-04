@@ -17,16 +17,15 @@ export const Overlay = styled.div`
 export const Container = styled.div`
   width: 100%;
   max-width: 450px;
-  background: ${props => props.theme.colors.white};
+  background: ${(props) => props.theme.colors.white};
   border-radius: 4px;
   padding: 24px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
 
   h1 {
     font-size: 22px;
-    color: ${({theme, danger}) => (
-    danger ? theme.colors.danger.main : theme.colors.gray[900]
-  )};
+    color: ${({ theme, danger }) =>
+      danger ? theme.colors.danger.main : theme.colors.gray[900]};
   }
 
   p {
@@ -48,11 +47,11 @@ export const Footer = styled.footer`
     padding: 0 16px;
     height: 52px;
     font-size: 16px;
-    color: ${props => props.theme.colors.gray[200]};
+    color: ${(props) => props.theme.colors.gray[200]};
     transition: border 0.2s ease-in;
   }
 
   .cancel-button:hover {
-    border: 1px solid ${props => props.theme.colors.gray[200]};
+    border: 1px solid ${(props) => props.theme.colors.gray[200]};
   }
 `;

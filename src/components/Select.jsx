@@ -13,7 +13,16 @@ export default styled.select`
   outline: none;
   transition: border-color 0.2s ease-in;
 
+  appearance: none; /* Removes the default arrow */
+  -webkit-appearance: none; /* Removes the arrow in Safari */
+  -moz-appearance: none;
+
   &:focus {
     border: 2px solid ${({ theme }) => theme.colors.primary.main};
+  }
+
+  &[disabled] {
+    background: ${({ theme }) => theme.colors.gray[100]};
+    border-color: ${({ theme }) => theme.colors.gray[200]};
   }
 `;

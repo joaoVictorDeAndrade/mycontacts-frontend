@@ -9,14 +9,14 @@ import { Form, ButtonContainer } from './styles.js';
 
 import FormGroup from '../FormGroup/FormGroup.jsx';
 import Input from '../Input.jsx';
-import Select from '../Select.jsx';
 import Button from '../Button.jsx';
+import { CategoriesSelect } from '../CategoriesSelect.jsx';
 
 export default function ContactForm({ buttonLabel }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [category, setCategory] = useState('');
+  const [categoryId, setCategoryId] = useState('');
 
   const { errors, setError, removeError, getErrorMessageByFieldName } =
     useErrors();
@@ -48,8 +48,9 @@ export default function ContactForm({ buttonLabel }) {
   }
 
   function handlePhoneChange(event) {
-    const input = event.target.value;
-    setPhone(formatPhone(input));
+    const input = formatPhone(event.target.value);
+
+    setPhone(input);
 
     if (input.length < 14) {
       setError({ field: 'phone', message: 'Telefone inválido' });
@@ -66,7 +67,7 @@ export default function ContactForm({ buttonLabel }) {
       name,
       email,
       phone,
-      category,
+      categoryId,
     });
   }
 
@@ -101,16 +102,10 @@ export default function ContactForm({ buttonLabel }) {
         />
       </FormGroup>
 
-      <FormGroup>
-        <Select
-          value={category}
-          onChange={({ target }) => setCategory(target.value)}
-        >
-          <option value="">Selecione uma categoria</option>
-          <option value="instagram">Instagram</option>
-          <option value="discord">Discord</option>
-        </Select>
-      </FormGroup>
+      <CategoriesSelect
+        value={categoryId}
+        onChange={({ target }) => setCategoryId(target.value)}
+      />
 
       <ButtonContainer>
         <Button type="submit" disabled={!isFormValid}>

@@ -5,7 +5,7 @@ import { fullNormalize } from '../../utils/fullNormalize.js';
 import { Link } from 'react-router-dom';
 
 import Loader from '../../components/Loader/Loader.jsx';
-import Button from '../../components/Button.jsx';
+import Button from '../../components/Button';
 
 import {
   Container,

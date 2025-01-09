@@ -16,6 +16,10 @@ class ContactsService {
       body: contact,
     });
   }
+
+  async deleteContact(contactId) {
+    return HttpClient.delete(`${BASE_PATH}/${contactId}`);
+  }
 }
 
 export default new ContactsService();

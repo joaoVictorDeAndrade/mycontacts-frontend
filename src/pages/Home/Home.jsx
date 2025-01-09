@@ -79,6 +79,14 @@ export default function Home() {
     fetchContacts();
   }
 
+  async function handleDeleteContact(contactId) {
+    try {
+      await ContactsService.deleteContact(contactId);
+    } catch (error) {
+      console.log('Erro ao deletar o contato', error);
+    }
+  }
+
   if (isLoading) return <Loader />;
 
   return (
@@ -169,7 +177,10 @@ export default function Home() {
                 <Link to={`/edit/${contact.id}`}>
                   <img src={edit} alt="Editar contato" />
                 </Link>
-                <button type="button">
+                <button
+                  type="button"
+                  onClick={() => handleDeleteContact(contact.id)}
+                >
                   <img src={trash} alt="Remover contato" />
                 </button>
               </div>

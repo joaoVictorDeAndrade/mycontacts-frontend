@@ -23,5 +23,6 @@ export default function FormGroup({ children, isLoading = false, error = '' }) {
 
 FormGroup.propTypes = {
   children: PropTypes.node.isRequired,
+  isLoading: PropTypes.bool,
   error: PropTypes.string,
 };

@@ -34,7 +34,9 @@ const round = keyframes`
   }
 `;
 
-export const StyledSpinner = styled.div`
+export const StyledSpinner = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== 'size',
+})`
   color: ${({ theme }) => theme.colors.primary.main};
   font-size: ${({ size }) => `${size}px`};
   width: 1em;

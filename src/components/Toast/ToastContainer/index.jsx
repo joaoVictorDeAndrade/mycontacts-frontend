@@ -8,9 +8,9 @@ export function ToastContainer() {
   const messageRefs = useRef({});
 
   useEffect(() => {
-    function handleAddToast({ type, text }) {
+    function handleAddToast({ type, text, duration = 7000 }) {
       const id = Math.random();
-      setMessages((prevState) => [...prevState, { id, type, text }]);
+      setMessages((prevState) => [...prevState, { id, type, text, duration }]);
 
       setTimeout(() => {
         if (messageRefs.current[id]) {

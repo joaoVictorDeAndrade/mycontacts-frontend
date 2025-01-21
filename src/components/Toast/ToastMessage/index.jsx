@@ -1,16 +1,18 @@
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { Container } from './styles.js';
 
 import xCircleIcon from '../../../assets/images/icons/x-circle.svg';
 import checkCircleIcon from '../../../assets/images/icons/check-circle.svg';
 
-export function ToastMessage({ message, onRemoveMessage }) {
+export const ToastMessage = forwardRef(({ message, onRemoveMessage }, ref) => {
   function handleRemoveToast() {
     onRemoveMessage(message.id);
   }
 
   return (
     <Container
+      ref={ref}
       type={message.type}
       onClick={handleRemoveToast}
       tabIndex={0}
@@ -21,7 +23,7 @@ export function ToastMessage({ message, onRemoveMessage }) {
       <strong>{message.text}</strong>
     </Container>
   );
-}
+});
 
 ToastMessage.propTypes = {
   message: PropTypes.shape({

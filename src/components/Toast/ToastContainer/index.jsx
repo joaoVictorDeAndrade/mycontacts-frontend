@@ -1,17 +1,22 @@
 import { Container } from './styles.js';
 import { ToastMessage } from '../ToastMessage/index.jsx';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { toastEventManager } from '../../../utils/toast.js';
 
 export function ToastContainer() {
   const [messages, setMessages] = useState([]);
+  const messageRefs = useRef({});
 
   useEffect(() => {
     function handleAddToast({ type, text }) {
-      setMessages((prevState) => [
-        ...prevState,
-        { id: Math.random(), type, text },
-      ]);
+      const id = Math.random();
+      setMessages((prevState) => [...prevState, { id, type, text }]);
+
+      setTimeout(() => {
+        if (messageRefs.current[id]) {
+          messageRefs.current[id].focus();
+        }
+      }, 100);
     }
 
     toastEventManager.on('add-toast', handleAddToast);
@@ -25,6 +30,8 @@ export function ToastContainer() {
     setMessages((prevState) =>
       prevState.filter((message) => message.id !== id)
     );
+
+    delete messageRefs.current[id];
   }
 
   return (
@@ -33,6 +40,7 @@ export function ToastContainer() {
         <ToastMessage
           key={message.id}
           message={message}
+          ref={(el) => (messageRefs.current[message.id] = el)}
           onRemoveMessage={handleRemoveMessage}
         />
       ))}

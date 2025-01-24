@@ -2,13 +2,14 @@ import PageHeader from '../../components/PageHeader/PageHeader.jsx';
 import ContactForm from '../../components/ContactForm/ContactForm.jsx';
 import Loader from '../../components/Loader/Loader.jsx';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 import ContactsService from '../../services/ContactsService';
 import { toast } from '../../utils/toast.js';
 
 export default function EditContact() {
   const [isLoading, setIsLoading] = useState(true);
+  const contactFormRef = useRef(null);
 
   const navigate = useNavigate();
   const { id } = useParams();
@@ -18,6 +19,8 @@ export default function EditContact() {
       try {
         setIsLoading(true);
         const contact = await ContactsService.getContactById(id);
+
+        contactFormRef.current.setFieldsValues(contact);
       } catch (error) {
         navigate('/');
         toast({
@@ -40,7 +43,11 @@ export default function EditContact() {
 
       <PageHeader title="Editar contato" />
 
-      <ContactForm buttonLabel="Salvar alterações" onSubmit={handleSubmit} />
+      <ContactForm
+        ref={contactFormRef}
+        buttonLabel="Salvar alterações"
+        onSubmit={handleSubmit}
+      />
     </>
   );
 }

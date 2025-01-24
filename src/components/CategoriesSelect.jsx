@@ -44,7 +44,7 @@ export function CategoriesSelect({
 }
 
 CategoriesSelect.propTypes = {
-  value: PropTypes.string.isRequired,
+  value: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   error: PropTypes.bool,
   placeholder: PropTypes.string,

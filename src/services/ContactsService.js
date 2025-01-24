@@ -11,6 +11,10 @@ class ContactsService {
     });
   }
 
+  async getContactById(id) {
+    return HttpClient.get(`${BASE_PATH}/${id}`);
+  }
+
   async createContact(contact) {
     return HttpClient.post(`${BASE_PATH}`, {
       body: contact,

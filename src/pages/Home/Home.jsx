@@ -87,10 +87,10 @@ export default function Home() {
     }
   }
 
-  if (isLoading) return <Loader />;
-
   return (
     <Container>
+      <Loader isLoading={isLoading} />
+
       {contacts.length > 0 && (
         <InputSearchContainer>
           <input

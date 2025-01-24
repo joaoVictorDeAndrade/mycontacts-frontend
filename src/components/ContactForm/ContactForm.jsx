@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useState, forwardRef } from 'react';
 import { useErrors } from '../../hooks/useErrors.js';
 
 import { isEmailValid } from '../../utils/isEmailValid.js';
@@ -12,7 +12,7 @@ import Input from '../Input.jsx';
 import Button from '../Button';
 import { CategoriesSelect } from '../CategoriesSelect.jsx';
 
-export default function ContactForm({ buttonLabel, onSubmit }) {
+export default function ContactForm({ buttonLabel, onSubmit, ref }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');

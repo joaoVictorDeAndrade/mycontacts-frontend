@@ -21,6 +21,12 @@ class ContactsService {
     });
   }
 
+  async updateContact(id, contact) {
+    return HttpClient.put(`${BASE_PATH}/${id}`, {
+      body: contact,
+    });
+  }
+
   async deleteContact(contactId) {
     return HttpClient.delete(`${BASE_PATH}/${contactId}`);
   }

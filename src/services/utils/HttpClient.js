@@ -60,7 +60,7 @@ class HttpClient {
     let responseBody = null;
 
     // Faz o parse do body caso seja JSON
-    if (contentType.includes('application/json')) {
+    if (contentType?.includes('application/json')) {
       responseBody = await response.json();
     }
 

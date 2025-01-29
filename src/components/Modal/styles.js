@@ -4,7 +4,7 @@ export const Overlay = styled.div`
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(3px);
 
-  position: absolute;
+  position: fixed;
   width: 100vw;
   height: 100vh;
   left: 0;
@@ -22,19 +22,19 @@ export const Container = styled.div`
   padding: 24px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
 
-  h1 {
+  > h1 {
     font-size: 22px;
     color: ${({ theme, danger }) =>
       danger ? theme.colors.danger.main : theme.colors.gray[900]};
   }
 
-  p {
-    margin-top: 8px;
+  .modal-body {
+    margin-top: 24px;
   }
 `;
 
 export const Footer = styled.footer`
-  margin-top: 32px;
+  margin-top: 24px;
   display: flex;
   justify-content: flex-end;
   align-items: center;

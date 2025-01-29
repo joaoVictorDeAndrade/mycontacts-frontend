@@ -91,6 +91,7 @@ export default function Home() {
 
   function closeDeleteModal() {
     setIsDeleteModalVisible(false);
+    setContactToDelete(null);
   }
 
   async function deleteContact() {

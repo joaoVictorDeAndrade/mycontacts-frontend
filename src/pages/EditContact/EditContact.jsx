@@ -6,11 +6,14 @@ import { useEffect, useState, useRef } from 'react';
 
 import ContactsService from '../../services/ContactsService';
 import { toast } from '../../utils/toast.js';
+import useIsMounted from '../../hooks/useIsMounted.js';
 
 export default function EditContact() {
   const [isLoading, setIsLoading] = useState(true);
   const [contactName, setContactName] = useState('');
   const contactFormRef = useRef(null);
+
+  const isMounted = useIsMounted();
 
   const navigate = useNavigate();
   const { id } = useParams();
@@ -21,21 +24,25 @@ export default function EditContact() {
         setIsLoading(true);
         const contact = await ContactsService.getContactById(id);
 
-        contactFormRef.current.setFieldsValues(contact);
-        setContactName(contact.name);
+        if (isMounted()) {
+          contactFormRef.current.setFieldsValues(contact);
+          setContactName(contact.name);
+        }
       } catch (error) {
-        navigate('/');
-        toast({
-          type: 'danger',
-          text: 'Contato não encontrado!',
-        });
+        if (isMounted()) {
+          navigate('/');
+          toast({
+            type: 'danger',
+            text: 'Contato não encontrado!',
+          });
+        }
       } finally {
         setIsLoading(false);
       }
     }
 
     fetchContact();
-  }, [id, navigate]);
+  }, [id, navigate, isMounted]);
 
   async function handleSubmit(formData) {
     try {

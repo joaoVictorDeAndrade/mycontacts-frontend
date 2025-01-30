@@ -1,4 +1,5 @@
 import HttpClient from './utils/HttpClient.js';
+import { delay } from '../utils/delay.js';
 
 const BASE_PATH = '/contacts';
 
@@ -12,6 +13,7 @@ class ContactsService {
   }
 
   async getContactById(id) {
+    await delay(3000);
     return HttpClient.get(`${BASE_PATH}/${id}`);
   }
 

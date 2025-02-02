@@ -14,7 +14,9 @@ export const Overlay = styled.div`
   align-items: center;
 `;
 
-export const Container = styled.div`
+export const Container = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== 'danger',
+})`
   width: 100%;
   max-width: 450px;
   background: ${(props) => props.theme.colors.white};

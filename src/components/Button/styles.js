@@ -1,6 +1,8 @@
 import styled, { css } from 'styled-components';
 
-export const StyledButton = styled.button`
+export const StyledButton = styled.button.withConfig({
+  shouldForwardProp: (prop) => prop !== 'danger',
+})`
   height: 52px;
   border: none;
   padding: 0 16px;

@@ -1,10 +1,13 @@
 import HttpClient from './utils/HttpClient.js';
+import CategoryMapper from './mappers/CategoryMapper.js';
 
 const BASE_PATH = '/categories';
 
 class CategoriesService {
   async fetchCategories() {
-    return HttpClient.get(`${BASE_PATH}`);
+    const categoriesList = await HttpClient.get(`${BASE_PATH}`);
+
+    return categoriesList.map(CategoryMapper.toDomain);
   }
 }
 

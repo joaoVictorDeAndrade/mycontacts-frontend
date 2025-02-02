@@ -3,14 +3,12 @@ import { formatPhone } from '../../utils/formatPhone.js';
 import { Link } from 'react-router-dom';
 
 import Loader from '../../components/Loader/Loader.jsx';
-import Button from '../../components/Button';
 import Modal from '../../components/Modal/Modal.jsx';
 
 import {
   Container,
   ListHeader,
   Card,
-  ErrorContainer,
   EmptyListContainer,
   SearchNotFoundContainer,
 } from './styles.js';
@@ -18,7 +16,6 @@ import {
 import arrow from '../../assets/images/icons/arrow.svg';
 import edit from '../../assets/images/icons/edit.svg';
 import trash from '../../assets/images/icons/trash.svg';
-import sad from '../../assets/images/sad.svg';
 import emptyBox from '../../assets/images/empty-box.svg';
 import magnifierQuestion from '../../assets/images/magnifier-question.svg';
 
@@ -26,6 +23,7 @@ import { useHome } from './useHome.js';
 
 import { InputSearch } from './components/InputSearch/InputSearch.jsx';
 import { Header } from './components/Header/Header.jsx';
+import { ErrorStatus } from './components/ErrorStatus/ErrorStatus.jsx';
 
 export default function Home() {
   const {
@@ -58,17 +56,7 @@ export default function Home() {
         qtyFilteredContacts={filteredContacts.length}
       />
 
-      {hasError && (
-        <ErrorContainer>
-          <img src={sad} alt="" />
-          <div className="details">
-            <strong>Ocorreu um erro ao obter os seus contatos!</strong>
-            <Button type="button" onClick={handleTryAgain}>
-              Tentar novamente
-            </Button>
-          </div>
-        </ErrorContainer>
-      )}
+      {hasError && <ErrorStatus handleTryAgain={handleTryAgain} />}
 
       {!hasError && (
         <>

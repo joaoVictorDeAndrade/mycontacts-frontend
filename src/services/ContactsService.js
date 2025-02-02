@@ -18,7 +18,7 @@ class ContactsService {
   }
 
   async getContactById(id) {
-    const contact = HttpClient.get(`${BASE_PATH}/${id}`);
+    const contact = await HttpClient.get(`${BASE_PATH}/${id}`);
 
     return ContactMapper.toDomain(contact);
   }

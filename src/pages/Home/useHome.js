@@ -32,6 +32,7 @@ export function useHome() {
       setContacts(contactsList);
     } catch (error) {
       setHasError(true);
+      setContacts([]);
     } finally {
       setIsLoading(false);
     }

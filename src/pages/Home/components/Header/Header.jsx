@@ -3,12 +3,8 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Container } from './styles.js';
 
-export function Header({ hasError, qtyContacts, qtyFilteredContacts }) {
-  const alignment = hasError
-    ? 'flex-end'
-    : qtyContacts > 0
-      ? 'space-between'
-      : 'center';
+export function Header({ hasError, qtyFilteredContacts }) {
+  const alignment = qtyFilteredContacts > 0 ? 'space-between' : 'center';
 
   return (
     <Container justifyContent={alignment}>
@@ -26,6 +22,5 @@ export function Header({ hasError, qtyContacts, qtyFilteredContacts }) {
 
 Header.propTypes = {
   hasError: PropTypes.bool.isRequired,
-  qtyContacts: PropTypes.number.isRequired,
   qtyFilteredContacts: PropTypes.number.isRequired,
 };

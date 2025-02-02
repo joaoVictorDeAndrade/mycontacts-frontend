@@ -10,14 +10,7 @@ export default function NewContact() {
 
   async function handleSubmit(formData) {
     try {
-      const contact = {
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        category_id: formData.categoryId,
-      };
-
-      await ContactsService.createContact(contact);
+      await ContactsService.createContact(formData);
 
       contactFormRef.current.resetFields();
 

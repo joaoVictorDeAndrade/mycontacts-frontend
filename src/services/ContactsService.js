@@ -1,32 +1,38 @@
 import HttpClient from './utils/HttpClient.js';
-import { delay } from '../utils/delay.js';
+import ContactMapper from './mappers/ContactMapper.js';
 
 const BASE_PATH = '/contacts';
 
 class ContactsService {
   async fetchContacts(orderBy = 'asc') {
-    return HttpClient.get(`${BASE_PATH}?orderBy=${orderBy}`, {
-      headers: {
-        Authorization: 'meu-token-super-secreto',
-      },
-    });
+    const contactsList = await HttpClient.get(
+      `${BASE_PATH}?orderBy=${orderBy}`,
+      {
+        headers: {
+          Authorization: 'meu-token-super-secreto',
+        },
+      }
+    );
+
+    return contactsList.map(ContactMapper.toDomain);
   }
 
   async getContactById(id) {
-    await delay(3000);
-    return HttpClient.get(`${BASE_PATH}/${id}`);
+    const contact = HttpClient.get(`${BASE_PATH}/${id}`);
+
+    return ContactMapper.toDomain(contact);
   }
 
   async createContact(contact) {
-    return HttpClient.post(`${BASE_PATH}`, {
-      body: contact,
-    });
+    const body = ContactMapper.toPersistence(contact);
+
+    return HttpClient.post(`${BASE_PATH}`, { body });
   }
 
   async updateContact(id, contact) {
-    return HttpClient.put(`${BASE_PATH}/${id}`, {
-      body: contact,
-    });
+    const body = ContactMapper.toPersistence(contact);
+
+    return HttpClient.put(`${BASE_PATH}/${id}`, { body });
   }
 
   async deleteContact(contactId) {

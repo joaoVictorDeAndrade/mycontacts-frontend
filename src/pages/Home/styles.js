@@ -4,37 +4,6 @@ export const Container = styled.div`
   margin-top: 32px;
 `;
 
-export const Header = styled.header.withConfig({
-  shouldForwardProp: (prop) => prop !== 'justifyContent',
-})`
-  display: flex;
-  justify-content: ${({ justifyContent }) => justifyContent};
-  align-items: center;
-  margin-top: 32px;
-  border-bottom: 2px solid ${({ theme }) => theme.colors.gray[100]};
-  padding-bottom: 16px;
-
-  strong {
-    font-size: 24px;
-    color: ${({ theme }) => theme.colors.gray[900]};
-  }
-
-  a {
-    color: ${({ theme }) => theme.colors.primary.main};
-    text-decoration: none;
-    font-weight: bold;
-    border: 2px solid ${({ theme }) => theme.colors.primary.main};
-    padding: 8px 16px;
-    border-radius: 4px;
-    transition: all 0.2s ease-in;
-
-    &:hover {
-      background: ${({ theme }) => theme.colors.primary.main};
-      color: #fff;
-    }
-  }
-`;
-
 export const ListHeader = styled.header.withConfig({
   shouldForwardProp: (prop) => prop !== 'orderBy',
 })`
@@ -108,24 +77,6 @@ export const Card = styled.div`
     button {
       background: transparent;
       border: none;
-    }
-  }
-`;
-
-export const InputSearchContainer = styled.div`
-  width: 100%;
-
-  input {
-    width: 100%;
-    background: #fff;
-    border: none;
-    border-radius: 25px;
-    height: 50px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-    padding: 0 16px;
-
-    &::placeholder {
-      color: #bcbcbc;
     }
   }
 `;

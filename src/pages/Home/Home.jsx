@@ -8,10 +8,8 @@ import Modal from '../../components/Modal/Modal.jsx';
 
 import {
   Container,
-  Header,
   ListHeader,
   Card,
-  InputSearchContainer,
   ErrorContainer,
   EmptyListContainer,
   SearchNotFoundContainer,
@@ -23,7 +21,11 @@ import trash from '../../assets/images/icons/trash.svg';
 import sad from '../../assets/images/sad.svg';
 import emptyBox from '../../assets/images/empty-box.svg';
 import magnifierQuestion from '../../assets/images/magnifier-question.svg';
+
 import { useHome } from './useHome.js';
+
+import { InputSearch } from './components/InputSearch/InputSearch.jsx';
+import { Header } from './components/Header/Header.jsx';
 
 export default function Home() {
   const {
@@ -36,7 +38,6 @@ export default function Home() {
     filteredContacts,
     searchTerm,
     orderBy,
-    justifyContent,
     deleteContact,
     closeDeleteModal,
     handleTryAgain,
@@ -48,26 +49,14 @@ export default function Home() {
   return (
     <Container>
       {contacts.length > 0 && (
-        <InputSearchContainer>
-          <input
-            type="text"
-            placeholder="Pesquise pelo nome"
-            value={searchTerm}
-            onChange={handleChangeSearchTerm}
-          />
-        </InputSearchContainer>
+        <InputSearch value={searchTerm} onChange={handleChangeSearchTerm} />
       )}
 
-      <Header justifyContent={justifyContent}>
-        {!hasError && contacts.length > 0 && (
-          <strong>
-            {contacts.length}
-            {contacts.length === 1 ? ' contato' : ' contatos'}
-          </strong>
-        )}
-
-        <Link to="/new">Novo contato</Link>
-      </Header>
+      <Header
+        hasError={hasError}
+        qtyContacts={contacts.length}
+        qtyFilteredContacts={filteredContacts.length}
+      />
 
       {hasError && (
         <ErrorContainer>

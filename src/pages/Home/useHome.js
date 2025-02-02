@@ -23,12 +23,6 @@ export function useHome() {
     });
   }, [contacts, searchTerm]);
 
-  const justifyContent = useMemo(() => {
-    if (hasError) return 'flex-end';
-
-    return contacts.length > 0 ? 'space-between' : 'center';
-  }, [hasError, contacts.length]);
-
   const fetchContacts = useCallback(async () => {
     try {
       setIsLoading(true);
@@ -100,7 +94,6 @@ export function useHome() {
     filteredContacts,
     searchTerm,
     orderBy,
-    justifyContent,
     deleteContact,
     closeDeleteModal,
     handleTryAgain,

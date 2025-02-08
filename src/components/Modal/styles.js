@@ -1,6 +1,28 @@
-import styled from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 
-export const Overlay = styled.div`
+const fadeIn = keyframes`
+  from { opacity: 0; }
+  to { opacity: 1; }
+`;
+
+const fadeOut = keyframes`
+  from { opacity: 1; }
+  to { opacity: 0; }
+`;
+
+const scaleIn = keyframes`
+  from { transform: scale(0); }
+  to { transform: scale(1); }
+`;
+
+const scaleOut = keyframes`
+  from { transform: scale(1); }
+  to { transform: scale(0); }
+`;
+
+export const Overlay = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== 'isLeaving',
+})`
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(3px);
 
@@ -12,10 +34,18 @@ export const Overlay = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  animation: ${fadeIn} 0.3s;
+
+  ${({ isLeaving }) =>
+    isLeaving &&
+    css`
+      animation: ${fadeOut} 0.3s forwards;
+    `}
 `;
 
 export const Container = styled.div.withConfig({
-  shouldForwardProp: (prop) => prop !== 'danger',
+  shouldForwardProp: (prop) => prop !== 'danger' || prop !== 'isLeaving',
 })`
   width: 100%;
   max-width: 450px;
@@ -33,6 +63,8 @@ export const Container = styled.div.withConfig({
   .modal-body {
     margin-top: 24px;
   }
+
+  animation: ${scaleIn} 0.3s;
 `;
 
 export const Footer = styled.footer`

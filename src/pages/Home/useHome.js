@@ -61,7 +61,6 @@ export function useHome() {
 
   function closeDeleteModal() {
     setIsDeleteModalVisible(false);
-    setContactToDelete(null);
   }
 
   async function deleteContact() {

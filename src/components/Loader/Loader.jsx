@@ -17,7 +17,7 @@ export default function Loader({ isLoading }) {
 
   return (
     <ReactPortal containerId="loader-root">
-      <Overlay>
+      <Overlay role="status" aria-label="Carregando">
         <Container>
           <Spinner size={90} />
         </Container>

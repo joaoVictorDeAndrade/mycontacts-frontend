@@ -29,23 +29,21 @@ export default function Modal({
 
   useEffect(() => {
     if (visible) setShouldRender(true);
-
-    let timeoutId;
-
-    if (!visible) {
-      timeoutId = setTimeout(() => {
-        setShouldRender(false);
-      }, 300);
-    }
-
-    return () => clearTimeout(timeoutId);
   }, [visible]);
+
+  function handleAnimationEnd(event) {
+    const overlayAnimationEnded = event.target === event.currentTarget;
+
+    if (!visible && overlayAnimationEnded) {
+      setShouldRender(false);
+    }
+  }
 
   if (!shouldRender) return null;
 
   return (
     <ReactPortal containerId="modal-root">
-      <Overlay isLeaving={!visible}>
+      <Overlay isLeaving={!visible} onAnimationEnd={handleAnimationEnd}>
         <Container danger={danger} isLeaving={!visible}>
           <h1>{title}</h1>
 

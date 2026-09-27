@@ -45,7 +45,7 @@ export const Overlay = styled.div.withConfig({
 `;
 
 export const Container = styled.div.withConfig({
-  shouldForwardProp: (prop) => prop !== 'danger' || prop !== 'isLeaving',
+  shouldForwardProp: (prop) => prop !== 'danger' && prop !== 'isLeaving',
 })`
   width: 100%;
   max-width: 450px;
@@ -65,6 +65,12 @@ export const Container = styled.div.withConfig({
   }
 
   animation: ${scaleIn} 0.3s;
+
+  ${({ isLeaving }) =>
+    isLeaving &&
+    css`
+      animation: ${scaleOut} 0.2s forwards;
+    `}
 `;
 
 export const Footer = styled.footer`
